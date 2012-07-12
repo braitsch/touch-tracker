@@ -1,0 +1,9 @@
+Author: Stephen Braitsch
+Date: 07/11/2012 06:23 PM
+
+Project Name: TouchTracker
+Filesize: 268938 Bytes
+Build Type: false
+
+Target Air Version: 3.1
+Built On: Mac OS X 10.7.4
