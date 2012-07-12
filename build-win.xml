@@ -16,7 +16,6 @@
 	<property name="cert_password" value="password" />
 	
 	<!--libraries -->	
-	<property name="sdk-mac" value="/Users/braitsch/Code/flash/libs/flex_sdk_4.5.1.21328" />
 	<property name="sdk" value="C:\Users\braitsch\Code\sdks\flex_sdk_4.6" />
 	<property name="mxmlc" value="${sdk}/lib/mxmlc.jar" />
 	<property name="adl" value="${sdk}/bin/adl.exe" />
