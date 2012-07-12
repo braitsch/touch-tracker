@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="AIR 3.1 Build File" default="*. Debug Air Application">
+<project name="AIR 3.1 Windows Build File" default="*. Debug Air Application">
 
 	<!--project properties -->
 	<property name="project_name" value="TouchTracker" />
@@ -16,10 +16,11 @@
 	<property name="cert_org_name" value="braitsch" />
 	<property name="cert_password" value="password" />
 	
-	<!--libraries -->
-	<property name="sdk" value="/Users/braitsch/Code/flash/libs/flex_sdk_4.5.1.21328" />
+	<!--libraries -->	
+	<property name="sdk-mac" value="/Users/braitsch/Code/flash/libs/flex_sdk_4.5.1.21328" />
+	<property name="sdk" value="C:\Users\braitsch\Code\sdks\flex_sdk_4.6" />
 	<property name="mxmlc" value="${sdk}/lib/mxmlc.jar" />
-	<property name="adl" value="${sdk}/bin/adl" />
+	<property name="adl" value="${sdk}/bin/adl.exe" />
 	<property name="adt" value="${sdk}/lib/adt.jar" />
     	
 	<!-- Compile debug SWF and run it -->
@@ -79,7 +80,7 @@
             <arg value="-package"/>        	
             <arg value="-target"/> 
         	<arg value="native"/> 
-            <arg value="${deploy_dir}/${project_name}-${project_version}.dmg"/>
+            <arg value="${deploy_dir}/${project_name}-${project_version}.exe"/>
             <arg value="${deploy_dir}/${project_name}.app"/>            	
         </java>
     </target>	
