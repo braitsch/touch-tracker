@@ -20,8 +20,8 @@ package view {
 		
 		public function TouchConsole()
 		{
+			this.y = 60;
 			_touch.x = 50; _state.x = 300;
-			_touch.y = _state.y = 20;
 			_touch.text = _state.text = '';
 			_touch.size = _state.size = 14;
 			_touch.color = _state.color = 0xffffff;
@@ -43,18 +43,18 @@ package view {
 
 		private function getHardwareStatus():void
 		{
-			_state.text = 'hardware status \n--------------------------------------\n';
+			_state.text = 'Hardware Status \n--------------------------------------\n';
 			_state.label.text += 'Multitouch.maxTouchPoints : ' +Multitouch.maxTouchPoints+'\n';
 			var gestures:Boolean = Multitouch.supportsGestureEvents;
-			_state.label.text += 'Multitouch.supportsGestureEvents : ' +gestures;	
+			_state.label.text += 'Multitouch.supportsGestureEvents : ' +gestures + '\n';	
 			if (gestures){
                 var supportedGesturesVar:Vector.<String> = Multitouch.supportedGestures;
                 for (var i:int=0; i<supportedGesturesVar.length; ++i) {
-          			_state.label.text += '\n\t'+supportedGesturesVar[i];
+          			_state.label.text += '\t'+supportedGesturesVar[i] + '\n';
                 }
-				_state.label.text +='\n--------------------------------------\n';
+				_state.label.text +='--------------------------------------\n';
 			}
-			_state.label.text += 'Multitouch.supportsTouchEvents : ' +Multitouch.supportsTouchEvents;
+			_state.label.text += 'Multitouch.supportsTouchEvents : ' +Multitouch.supportsTouchEvents + '\n';
 		}
 
 		private function onMouseEvent(e:MouseEvent):void
