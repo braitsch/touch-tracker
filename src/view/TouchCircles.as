@@ -19,6 +19,8 @@ package view {
 		private function onAddedToStage(e:Event):void
 		{
 			attachRandomCircle();
+			stage.addEventListener(MouseEvent.MOUSE_UP, releaseCircle);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, dragCircle);
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, attachCircle);
 			stage.addEventListener(TransformGestureEvent.GESTURE_ZOOM, onStageZoom);
 			stage.addEventListener(TransformGestureEvent.GESTURE_ROTATE, onStageRotate);
@@ -26,13 +28,13 @@ package view {
 
 		private function onStageZoom(e:TransformGestureEvent):void
 		{
-			this.scaleX *= e.scaleX;
-			this.scaleX *= e.scaleX;
+		//	this.scaleX *= e.scaleX;
+		//	this.scaleX *= e.scaleX;
 		}
 
 		private function onStageRotate(e:TransformGestureEvent):void
 		{
-			this.rotation += e.rotation;
+		//	this.rotation += e.rotation;
 		}
 
 		private function attachRandomCircle():void
@@ -50,28 +52,27 @@ package view {
 				_activeTarget = new Circle();
 				_activeTarget.x = e.stageX;
 				_activeTarget.y = e.stageY;
+				_activeTarget.startDrag();
 				addChild(_activeTarget);
-				stage.addEventListener(MouseEvent.MOUSE_MOVE, dragCircle);
-				stage.addEventListener(MouseEvent.MOUSE_UP, releaseCircle);				
 			}
 		}
 
 		private function dragCircle(e:MouseEvent):void
 		{
-			if (e.stageY < _margin + _activeTarget.height/2){
-				_activeTarget.y = _margin + _activeTarget.height/2;
-			}	else{
-				_activeTarget.x = e.stageX;
-				_activeTarget.y = e.stageY;
+			if (_activeTarget != null){
+				if (e.stageY < _margin + _activeTarget.height/2){
+					_activeTarget.y = _margin + _activeTarget.height/2;
+				}	
 			}
 		}
 
 		private function releaseCircle(e:MouseEvent):void
 		{
-			drop(_activeTarget);
-			_activeTarget = null;
-			stage.removeEventListener(MouseEvent.MOUSE_MOVE, dragCircle);
-			stage.removeEventListener(MouseEvent.MOUSE_UP, releaseCircle);			
+			if (_activeTarget != null){
+				_activeTarget.stopDrag();
+				drop(_activeTarget);
+				_activeTarget = null;
+			}
 		}
 		
 		private function drop(c:Circle):void

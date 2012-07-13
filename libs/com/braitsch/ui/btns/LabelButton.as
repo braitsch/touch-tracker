@@ -57,6 +57,11 @@ package com.braitsch.ui.btns {
 			_label.y = _height / 2 - _label.height / 2 + 1; 
 		}
 		
+		public function get label():String
+		{
+			return _label.text;
+		}
+		
 		private function setup(w:uint, h:uint):void
 		{
 			_width = w; _height = h;

@@ -34,6 +34,11 @@ package com.braitsch.txt {
 			_text.label_txt.htmlText = s;
 		}
 		
+		public function get text():String
+		{
+			return _text.label_txt.text;
+		}
+		
 		public function set size(n:uint):void
 		{
 			_frmt.size = n;

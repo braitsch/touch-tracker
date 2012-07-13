@@ -34,8 +34,12 @@ package view {
 		{
 			getHardwareStatus();
 			stage.addEventListener(MouseEvent.CLICK, onMouseEvent);
+			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseEvent);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseEvent);
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseEvent);
+			stage.addEventListener(TouchEvent.TOUCH_TAP, onTouchEvent);
 			stage.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
+			stage.addEventListener(TouchEvent.TOUCH_MOVE, onTouchEvent);
 			stage.addEventListener(TransformGestureEvent.GESTURE_ZOOM, onTransformGestureEvent); 
 			stage.addEventListener(TransformGestureEvent.GESTURE_PAN, onTransformGestureEvent); 
 			stage.addEventListener(TransformGestureEvent.GESTURE_ROTATE, onTransformGestureEvent); 
@@ -68,6 +72,16 @@ package view {
 				s = s.substring(0, n);
 			}
 			_touch.label.htmlText = s;
+		}
+		
+		private function onTouchEvent(e:TouchEvent):void
+		{
+			var s:String = e.type+' :: x = '+e.stageX+' y = '+e.stageY + '<br>' +_touch.label.text;
+			if (_touch.label.numLines > 50){
+				var n:uint = _touch.label.getLineOffset(50);
+				s = s.substring(0, n);
+			}
+			_touch.label.htmlText = s;			
 		}
 		
 		private function onGestureEvent(e:GestureEvent):void
