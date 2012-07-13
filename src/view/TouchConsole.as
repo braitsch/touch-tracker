@@ -16,7 +16,7 @@ package view {
 		private static var _touch:TextField = new TextField();
 		private static var _state:TextField = new TextField();
 		
-		Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT; 
+		Multitouch.inputMode = MultitouchInputMode.GESTURE; 
 		
 		public function TouchConsole()
 		{
@@ -36,9 +36,12 @@ package view {
 			stage.addEventListener(MouseEvent.CLICK, onMouseEvent);
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseEvent);
 			stage.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
-			stage.addEventListener(GestureEvent.GESTURE_TWO_FINGER_TAP, onGestureEvent);
-			stage.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, onPressAndTap); 
+			stage.addEventListener(TransformGestureEvent.GESTURE_ZOOM, onTransformGestureEvent); 
+			stage.addEventListener(TransformGestureEvent.GESTURE_PAN, onTransformGestureEvent); 
+			stage.addEventListener(TransformGestureEvent.GESTURE_ROTATE, onTransformGestureEvent); 
 			stage.addEventListener(TransformGestureEvent.GESTURE_SWIPE, onTransformGestureEvent);
+			stage.addEventListener(GestureEvent.GESTURE_TWO_FINGER_TAP, onGestureEvent);
+			stage.addEventListener(PressAndTapGestureEvent.GESTURE_PRESS_AND_TAP, onPressAndTap);
 		}
 
 		private function getHardwareStatus():void

@@ -1,4 +1,5 @@
 package view {
+	import flash.events.TransformGestureEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,6 +20,19 @@ package view {
 		{
 			attachRandomCircle();
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, attachCircle);
+			stage.addEventListener(TransformGestureEvent.GESTURE_ZOOM, onStageZoom);
+			stage.addEventListener(TransformGestureEvent.GESTURE_ROTATE, onStageRotate);
+		}
+
+		private function onStageZoom(e:TransformGestureEvent):void
+		{
+			this.scaleX *= e.scaleX;
+			this.scaleX *= e.scaleX;
+		}
+
+		private function onStageRotate(e:TransformGestureEvent):void
+		{
+			this.rotation += e.rotation;
 		}
 
 		private function attachRandomCircle():void
