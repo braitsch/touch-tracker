@@ -13,19 +13,23 @@ package view {
 	public class AppNav extends Sprite {
 		
 		private static var _btns	:Sprite = new Sprite();
+		private static var _btn0	:LabelButton = new LabelButton(90, 30, 'Clear', theme.DEFAULT);
 		private static var _btn1	:LabelButton = new LabelButton(90, 30, 'Gesture', theme.DEFAULT);
 		private static var _btn2	:LabelButton = new LabelButton(90, 30, 'Console', theme.DEFAULT);
 		private static var _btn3	:LabelButton = new LabelButton(90, 30, 'Circles', theme.DEFAULT);
 		
 		public function AppNav()
 		{
+			_btn0.x = 10;
 			_btn2.x = _btn1.x + _btn1.width + 10;
 			_btn3.x = _btn2.x + _btn2.width + 10;
-			_btns.y = 10;
+			_btn0.y = _btns.y = 10;
 			_btns.addChild(_btn1);
 			_btns.addChild(_btn2);
 			_btns.addChild(_btn3);
+			addChild(_btn0);
 			addChild(_btns);
+			_btn0.addEventListener(MouseEvent.CLICK, clearView);
 			_btn1.addEventListener(MouseEvent.CLICK, toggleMode);
 			_btn2.addEventListener(MouseEvent.CLICK, showConsole);
 			_btn3.addEventListener(MouseEvent.CLICK, showCircles);
@@ -41,6 +45,11 @@ package view {
 				_btn1.label = 'Gesture';
 				Multitouch.inputMode = MultitouchInputMode.GESTURE; 				
 			}
+		}
+
+		private function clearView(e:MouseEvent):void
+		{
+			this.dispatchEvent(new AppEvent(AppEvent.CLEAR_VIEW));
 		}
 
 		private function showCircles(e:MouseEvent):void

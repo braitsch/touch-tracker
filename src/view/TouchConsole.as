@@ -20,7 +20,7 @@ package view {
 		
 		public function TouchConsole()
 		{
-			this.y = 60;
+			this.y = 70;
 			_touch.x = 50; _state.x = 300;
 			_touch.text = _state.text = '';
 			_touch.size = _state.size = 14;
@@ -29,6 +29,11 @@ package view {
 			addChild(_state);
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
+		
+		public function clear():void
+		{
+			_touch.text = '';
+		}		
 
 		private function onAddedToStage(e:Event):void
 		{
@@ -139,7 +144,7 @@ package view {
 			    _touch.label.text += 'Touch Complete' + e.touchPointID;
 			}
 		}
-		
+
 	}
 	
 }

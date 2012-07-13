@@ -15,6 +15,15 @@ package view {
 			this.visible = false;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
+		
+		public function clear():void
+		{
+			while(numChildren) {
+				var k:Circle = getChildAt(0) as Circle;
+				k.removeEventListener(Event.ENTER_FRAME, onDropFrame);
+				removeChild(getChildAt(0));	
+			}
+		}		
 
 		private function onAddedToStage(e:Event):void
 		{
@@ -88,7 +97,7 @@ package view {
 				e.target.removeEventListener(Event.ENTER_FRAME, onDropFrame);	
 			}
 		}
-		
+
 	}
 	
 }
