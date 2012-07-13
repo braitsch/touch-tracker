@@ -25,9 +25,9 @@
       <title>TouchTracker</title>
       <x>50</x>
       <y>50</y>
-      <width>600</width>
+      <width>900</width>
       <height>800</height>
-      <minSize>600 800</minSize>
+      <minSize>900 800</minSize>
       <visible>false</visible>
       <resizable>true</resizable>
       <minimizable>false</minimizable>

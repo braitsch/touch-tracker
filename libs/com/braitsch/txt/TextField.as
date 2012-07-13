@@ -1,4 +1,5 @@
 package com.braitsch.txt {
+	import flash.text.TextFieldAutoSize;
 	import fl.text.TLFTextField;
 
 	import flash.display.Sprite;
@@ -18,8 +19,8 @@ package com.braitsch.txt {
 			_text = font ? new font() : new HelveticaNeue();
 			addChild(_text);
 			this.selectable = false;
-			this.label.width = 300;
 			this.label.wordWrap = false;
+			this.align = TextFieldAutoSize.LEFT;
 			this.label.type = TextFieldType.INPUT;
 		}
 		

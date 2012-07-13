@@ -15,22 +15,21 @@ package com.braitsch.ui.btns {
 
 	public class LabelButton extends Sprite {
 
-		private static const	WHITE		:uint = 0xffffff;
-		private static const	DK_GREY		:uint = 0x888888;
-		private static const	STROKE		:uint = 0xC0C0C0;
-		public static const 	GLOW		:GlowFilter = new GlowFilter(0xffffff, 1, 6, 6, 2, BitmapFilterQuality.HIGH);				
-		
-		private var _width		:uint;
-		private var _height		:uint;
-		private var _over		:Shape = new Shape();
-		private var _bkgd		:Shape = new Shape();
-		private var _mtrx		:Matrix = new Matrix();
-		private var _label		:TextField;
-		private var _icon		:LabelButtonIcon;
+		private var _width			:uint;
+		private var _height			:uint;
+		private var _over			:Shape = new Shape();
+		private var _bkgd			:Shape = new Shape();
+		private var _stroke			:Shape = new Shape();
+		private var _mtrx			:Matrix = new Matrix();
+		private var _label			:TextField;
+		private var _icon			:LabelButtonIcon;
+		private var _corner			:uint = 5;
+		private var _theme			:Object;
 
-		public function LabelButton(width:uint, height:uint, label:String)
+		public function LabelButton(width:uint, height:uint, label:String, theme:Object)
 		{
 			setup(width, height);
+			_theme = theme;
 			drawBkgd();
 			drawOver();
 			drawStroke();
@@ -66,16 +65,16 @@ package com.braitsch.ui.btns {
 
 		private function drawBkgd():void
 		{
-			_bkgd.graphics.beginGradientFill(GradientType.LINEAR, [WHITE, DK_GREY], [.3, .3], [80, 255], _mtrx);
-			_bkgd.graphics.drawRect(0, 0, _width, _height);
+			_bkgd.graphics.beginGradientFill(GradientType.LINEAR, [_theme.c1, _theme.c2], [1, 1], [80, 255], _mtrx);
+			_bkgd.graphics.drawRoundRect(0, 0, _width, _height, _corner);
 			_bkgd.graphics.endFill();
 			addChild(_bkgd);
 		}
 
 		private function drawOver():void
 		{
-			_over.graphics.beginGradientFill(GradientType.LINEAR, [DK_GREY, WHITE], [.3, .3], [0, 170], _mtrx);
-			_over.graphics.drawRect(0, 0, _width, _height);
+			_over.graphics.beginGradientFill(GradientType.LINEAR, [_theme.c2, _theme.c1], [1, 1], [0, 170], _mtrx);
+			_over.graphics.drawRoundRect(0, 0, _width, _height, _corner);
 			_over.graphics.endFill();
 			_over.alpha = 0;
 			addChild(_over);
@@ -83,16 +82,19 @@ package com.braitsch.ui.btns {
 
 		private function drawStroke():void
 		{
-			graphics.lineStyle(1, STROKE, 1, true, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.MITER);
-			graphics.drawRect(0, 0, _width, _height);
-		}		
+			_stroke.graphics.lineStyle(2, _theme.stroke, 1, true, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND);
+			_stroke.graphics.drawRoundRect(0, 0, _width, _height, _corner);
+			addChild(_stroke);
+		}
 		
 		private function addLabel(s:String):void
 		{
 			_label = new TextField(DroidSerifBold);
-			_label.size = 12;
-			_label.color = TextField.GREY;
-			_label.filters = [GLOW];
+			_label.size = 14;
+			_label.color = _theme.text;
+			_label.mouseEnabled = false;
+			_label.mouseChildren = false;
+			if (_theme.glow) _label.filters = [new GlowFilter(_theme.glow, 1, 6, 6, 2, BitmapFilterQuality.HIGH)];
 			this.label = s;
 			addChild(_label);
 		}
@@ -120,13 +122,11 @@ package com.braitsch.ui.btns {
 		private function onRollOver(e:MouseEvent):void
 		{
 			TweenLite.to(_over, .3, {alpha:1});
-			TweenLite.to(_bkgd, .3, {alpha:0});
 		}	
 			
 		private function onRollOut(e:MouseEvent):void
 		{
 			TweenLite.to(_over, .3, {alpha:0});
-			TweenLite.to(_bkgd, .3, {alpha:1});
 		}
 		
 	}

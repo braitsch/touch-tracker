@@ -11,14 +11,14 @@ package view {
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
 
-	public class MouseTracker extends Sprite {
+	public class TouchConsole extends Sprite {
 		
 		private static var _touch:TextField = new TextField();
 		private static var _state:TextField = new TextField();
 		
 		Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT; 
 		
-		public function MouseTracker()
+		public function TouchConsole()
 		{
 			_touch.x = 50; _state.x = 300;
 			_touch.y = _state.y = 20;
