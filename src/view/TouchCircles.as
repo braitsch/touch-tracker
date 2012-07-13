@@ -2,27 +2,37 @@ package view {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.setTimeout;
 
 	public class TouchCircles extends Sprite {
 		
-		private static var _cutoffY			:uint = 50;
+		private static var _margin			:uint = 50;
 		private static var _activeTarget	:Circle;
 		
 		public function TouchCircles()
 		{
 			this.visible = false;
-			this.buttonMode = true;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 
 		private function onAddedToStage(e:Event):void
 		{
+			attachRandomCircle();
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, attachCircle);
+		}
+
+		private function attachRandomCircle():void
+		{
+			var c:Circle = new Circle();
+			c.x = (Math.random()*(stage.stageWidth - (_margin*2))) + _margin;
+			c.y = (Math.random()*_margin) + (_margin*2);
+			addChild(c); drop(c);
+			setTimeout(attachRandomCircle, (Math.random()*3000) + 1000);
 		}
 
 		private function attachCircle(e:MouseEvent):void
 		{
-			if (e.stageY > _cutoffY){
+			if (e.stageY > _margin){
 				_activeTarget = new Circle();
 				_activeTarget.x = e.stageX;
 				_activeTarget.y = e.stageY;
@@ -34,8 +44,8 @@ package view {
 
 		private function dragCircle(e:MouseEvent):void
 		{
-			if (e.stageY < _cutoffY + _activeTarget.height/2){
-				_activeTarget.y = _cutoffY + _activeTarget.height/2;
+			if (e.stageY < _margin + _activeTarget.height/2){
+				_activeTarget.y = _margin + _activeTarget.height/2;
 			}	else{
 				_activeTarget.x = e.stageX;
 				_activeTarget.y = e.stageY;
