@@ -50,8 +50,8 @@
 			<arg value="-swf-version=13" />
 			<arg value="-file-specs=./src/App.as" />
 			<arg value="-source-path=./libs" />			
-			<arg value="-library-path+=./swc/fonts.swc" />
-			<arg value="-library-path+=./swc/ui-kit.swc" />
+			<arg value="-library-path+=./swc/fonts/fonts.swc" />
+			<arg value="-library-path+=./swc/ui/ui-kit.swc" />
 			<arg value="-output=bin/${project_name}.swf" />
 		</java>
 	</target>			

@@ -3,7 +3,7 @@ package com.braitsch.ui.modal {
 
 	import com.braitsch.evt.UIEvent;
 	import com.braitsch.txt.TextField;
-	import com.braitsch.ui.btns.IconButton;
+	import com.braitsch.ui.btns.SimpleButtonIcon;
 	import com.braitsch.ui.forms.FormButton;
 
 	import flash.display.BitmapData;
@@ -23,7 +23,7 @@ package com.braitsch.ui.modal {
 		private var _height					:uint;
 		private var _windowBkgd				:Shape = new Shape();
 		private var _windowTitle			:ModalTitle = new ModalTitle();
-		private var _closeButton			:IconButton;
+		private var _closeButton			:SimpleButtonIcon;
 		private var _windowMessage			:TextField;
 		private var _okButton				:FormButton;
 		private var _noButton				:FormButton;
@@ -134,7 +134,7 @@ package com.braitsch.ui.modal {
 		
 		protected function addCloseButton():void
 		{
-			_closeButton = new IconButton(ModalCloseOff, ModalCloseOver);
+			_closeButton = new SimpleButtonIcon(ModalCloseOff, ModalCloseOver);
 			_closeButton.y = - _closeButton.height/2 + 6;
 			_closeButton.x = _width - _closeButton.width/2 - 6;
 			_closeButton.addEventListener(MouseEvent.CLICK, onCloseClick);

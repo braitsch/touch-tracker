@@ -12,6 +12,9 @@ package com.braitsch.evt {
 		public static const NATIVE_PROCESS_COMPLETE			:String = "NATIVE_PROCESS_COMPLETE";	
 		public static const NATIVE_PROCESS_QUEUE_COMPLETE	:String = "NATIVE_PROCESS_QUEUE_COMPLETE";
 		
+		public static const DISPLAY_MODE_NORMAL				:String = "DISPLAY_MODE_NORMAL";
+		public static const DISPLAY_MODE_FULLSCREEN			:String = "DISPLAY_MODE_FULLSCREEN";
+		
 		public var data:Object;
 		
 		public function AirEvent($type:String, $data:Object = null)
