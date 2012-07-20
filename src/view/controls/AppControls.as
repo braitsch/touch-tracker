@@ -10,6 +10,8 @@ package view.controls {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
+	import flash.events.TouchEvent;
+	import flash.ui.Multitouch;
 	import flash.utils.Timer;
 
 	public class AppControls extends Sprite {
@@ -29,8 +31,7 @@ package view.controls {
 			graphics.beginFill(0xff0000, 0);
 			graphics.drawRect(0, 0, 1050, 80);
 			graphics.endFill();
-			addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			addTouchMouseListeners();
 			_timerOpen.addEventListener(TimerEvent.TIMER_COMPLETE, openControls);
 			_timerClose.addEventListener(TimerEvent.TIMER_COMPLETE, closeControls);
 		}
@@ -62,10 +63,34 @@ package view.controls {
 			addChild(mask);
 			addChild(_controls);
 			_controls.mask = mask;
-			_controls.addEventListener(MouseEvent.CLICK, onControlClick);
 		}
 
-		private function onControlClick(e:MouseEvent):void
+		private function addTouchMouseListeners():void
+		{
+			if (Multitouch.supportsTouchEvents){
+				addEventListener(TouchEvent.TOUCH_BEGIN, onPress);
+				addEventListener(TouchEvent.TOUCH_END, onRelease);
+				_controls.addEventListener(TouchEvent.TOUCH_TAP, onControlSelection);
+			}	else{
+				addEventListener(MouseEvent.MOUSE_DOWN, onPress);
+				addEventListener(MouseEvent.MOUSE_UP, onRelease);
+				_controls.addEventListener(MouseEvent.CLICK, onControlSelection);				
+			}				
+		}		
+
+		private function onRelease(e:*):void
+		{
+			_timerOpen.stop(); e = null;
+		}
+
+		private function onPress(e:*):void
+		{
+			if (_controlsActive == false){
+				_timerOpen.reset(); _timerOpen.start(); e = null;
+			}
+		}
+		
+		private function onControlSelection(e:*):void
 		{
 			switch(e.target){
 				case _buttonClose 		: closeControls(); 		break;
@@ -73,19 +98,7 @@ package view.controls {
 				case _buttonNormal 		: onNormalMode(); 		break;
 				case _buttonFullscreen 	: onFullscreenMode(); 	break;
 			}
-		}
-
-		private function onMouseUp(e:MouseEvent):void
-		{
-			_timerOpen.stop();	
-		}
-
-		private function onMouseDown(e:MouseEvent):void
-		{
-			if (_controlsActive == false){
-				_timerOpen.reset(); _timerOpen.start();
-			}
-		}
+		}		
 		
 		private function openControls(e:TimerEvent):void
 		{

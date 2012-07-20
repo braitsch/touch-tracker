@@ -2,6 +2,8 @@ package view.debug {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.TouchEvent;
+	import flash.ui.Multitouch;
 
 	public class PrettyCircles extends Sprite {
 		
@@ -12,10 +14,14 @@ package view.debug {
 
 		private function onAddedToStage(e:Event):void
 		{
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, addCircle);
+			if (Multitouch.supportsTouchEvents){
+				stage.addEventListener(TouchEvent.TOUCH_MOVE, addCircle);
+			}	else{
+				stage.addEventListener(MouseEvent.MOUSE_MOVE, addCircle);
+			}
 		}
 		
-		private function addCircle(e:MouseEvent):void
+		private function addCircle(e:*):void
 		{
 			var c:Circle = new Circle();
 			c.x = e.stageX - App.view.x; c.y = e.stageY - App.view.y;

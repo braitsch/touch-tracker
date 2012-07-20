@@ -7,7 +7,6 @@
 	<property name="target_air_version" value="3.1" />
 	<property name="air_descriptor" value="bin/${project_name}-app.xml" />
 	<property name="deploy_dir" value="app" />
-	<property name="components" value="/Applications/Adobe\ Flash\ CS5/Common/Configuration/Component\ Source/ActionScript\ 3.0/User\ Interface" />
 	
 	<!--air certificate properties -->
 	<property name="keystore" value="certs/July-11-2012-0602PM.p12" />
