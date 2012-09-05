@@ -1,8 +1,6 @@
 package com.braitsch.ui.forms {
 	import fl.text.TLFTextField;
 
-	import model.AppEngine;
-
 	import com.braitsch.evt.UIEvent;
 
 	import flash.display.CapsStyle;
@@ -65,7 +63,7 @@ package com.braitsch.ui.forms {
 		{
 			for (var i:int = 0; i < _inputs.length; i++){
 				if (_inputs[i].field.text == '') {
-					AppEngine.dispatch(new UIEvent(UIEvent.SHOW_ALERT, 'Please fill in all required fields'));
+					dispatchEvent(new UIEvent(UIEvent.SHOW_ALERT, 'Please fill in all required fields'));
 					return false;
 				}
 			}
@@ -112,7 +110,7 @@ package com.braitsch.ui.forms {
 		
 		private function onKeyUp(e:KeyboardEvent):void
 		{
-			if (this.stage && e.keyCode == 13) dispatchEvent(new UIEvent(UIEvent.ENTER_KEY));
+			if (this.stage && e.keyCode == 13) dispatchEvent(new UIEvent(UIEvent.KEY_ENTER));
 		}		
 		
 		private function onFocusIn(e:FocusEvent):void

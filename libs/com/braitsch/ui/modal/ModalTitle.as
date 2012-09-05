@@ -1,4 +1,5 @@
 package com.braitsch.ui.modal {
+
 	import com.braitsch.txt.TextField;
 
 	import flash.display.Shape;

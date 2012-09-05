@@ -8,9 +8,10 @@ package com.braitsch.evt{
 		public static const OPEN_WINDOW				:String = "OPEN_WINDOW";
 		public static const CLOSE_WINDOW			:String = "CLOSE_WINDOW";
 		
-		public static const ENTER_KEY				:String = "ENTER_KEY";
 		public static const DRAG_AND_DROP			:String = "DRAG_AND_DROP";
 		public static const FILE_BROWSER_SELECTION	:String = "FILE_BROWSER_SELECTION";
+		
+		public static const KEY_ENTER				:String = "KEY_ENTER";
 		
 		public var data:Object;
 

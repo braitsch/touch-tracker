@@ -1,74 +1,48 @@
 ﻿package 
 {
-	import model.AppEngine;
-	import model.AppSettings;
 
-	import view.AppView;
-
+	import com.braitsch.air.AirApp;
 	import com.braitsch.evt.AirEvent;
+	import com.braitsch.sys.Diagnostics;
 
-	import flash.desktop.NativeApplication;
 	import flash.display.Sprite;
-	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
-	import flash.display.StageScaleMode;
-	import flash.events.Event;
-	import flash.events.InvokeEvent;
+	import flash.events.EventDispatcher;
 
-	public class App extends Sprite
+	public class App extends AirApp
 	{
 		
-		static public const WIDTH				:uint = 1050;
-		static public const HEIGHT				:uint = 1680;
+		static public const WIDTH				:uint = 1080;
+		static public const HEIGHT				:uint = 1920;
 		
-		private static var _view				:AppView;
-		static public function get view()		:AppView 		{ return _view; }	
-		private static var _engine				:AppEngine 		= new AppEngine();
-		static public function get engine()		:AppEngine 		{ return _engine; }	
+		static private var _view				:Sprite = new Sprite();
+		static private var _engine				:EventDispatcher = new EventDispatcher();
+		public static function get engine()		:EventDispatcher { return _engine; }
 		
 		public function App()
 		{	
-			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvokeEvent);
-		}
-		
-		private function onInvokeEvent(e:InvokeEvent):void
-		{
-			stage.nativeWindow.visible = false;
-			App.engine.addEventListener(AirEvent.SETTINGS_LOADED, onAppSettings);
-			AppSettings.init(stage);
-			NativeApplication.nativeApplication.removeEventListener(InvokeEvent.INVOKE, onInvokeEvent);
-			stage.nativeWindow.addEventListener(Event.CLOSING, function():void{ AppEngine.dispatch(new AirEvent(AirEvent.APP_CLOSING));});
+			addEventListener(AirEvent.SETTINGS_LOADED, onAppReady);
 		}
 
-		private function onAppSettings(e:AirEvent):void 
-		{
-			_view = new AppView(); 
-			addChild(_view); 
-			stage.nativeWindow.visible = true;
-			App.engine.removeEventListener(AirEvent.SETTINGS_LOADED, onAppSettings);
-			App.engine.addEventListener(AirEvent.DISPLAY_MODE_NORMAL, onDisplayModeNormal);
-			App.engine.addEventListener(AirEvent.DISPLAY_MODE_FULLSCREEN, onDisplayModeFullscreen);
-			App.engine.dispatchEvent(new AirEvent(AirEvent.DISPLAY_MODE_FULLSCREEN));
-		}
-
-		private function onDisplayModeNormal(e:AirEvent):void
-		{
-			stage.displayState = StageDisplayState.NORMAL;
-			_view.x = _view.y = 0;
-			stage.nativeWindow.width = App.WIDTH;
-			stage.nativeWindow.height = App.HEIGHT;
-		}
-
-		private function onDisplayModeFullscreen(e:AirEvent):void
+		private function onAppReady(e:AirEvent):void
 		{
 			stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 			this.graphics.beginFill(0x000000);
 			this.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
 			this.graphics.endFill();
-			if (stage.stageWidth > App.WIDTH) _view.x = (stage.stageWidth - App.WIDTH) / 2;
-			if (stage.stageHeight > App.HEIGHT) _view.y = (stage.stageHeight - App.HEIGHT) / 2;
+			attachView();
+		}
+
+		private function attachView():void
+		{
+		// _view layer is your app, the diagnostics layer just sits on top //	
+			_view.graphics.beginFill(0x333333);
+			_view.graphics.drawRect(0, 0, WIDTH, HEIGHT);
+			_view.graphics.endFill();
+			_view.addChild(new Diagnostics());
+			if (stage.width > WIDTH) _view.x = (stage.width - WIDTH) / 2;
+			if (stage.height > HEIGHT) _view.y = (stage.height - HEIGHT) / 2;
+			addChild(_view);
 		}
 		
 	}

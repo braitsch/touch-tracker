@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/3.1" minimumPatchLevel="0">
+
+    <id>com.braitsch.touch-tracker</id>
+
+    <filename>TouchTracker</filename>
+
+    <name>
+      <text xml:lang="en">TouchTracker</text>
+    </name>
+
+    <versionNumber>1.1.0</versionNumber>
+    <versionLabel>1.1.0</versionLabel>
+
+    <description>
+      <text xml:lang="en"></text>
+    </description>
+
+    <copyright>© Stephen Braitsch 2012</copyright>
+    
+    <supportedProfiles>extendedDesktop desktop</supportedProfiles>
+
+    <initialWindow>
+      <content>TouchTracker.swf</content>
+      <title>TouchTracker</title>
+      <x>50</x>
+      <y>50</y>
+      <width>1080</width>
+      <height>1920</height>
+      <minSize>100 100</minSize>
+      <visible>false</visible>
+      <resizable>true</resizable>
+      <minimizable>true</minimizable>
+      <maximizable>true</maximizable>
+      <transparent>false</transparent>
+      <systemChrome>standard</systemChrome>
+    </initialWindow>
+
+    <icon>
+        <image48x48>icons/AppIcon48.png</image48x48>
+        <image128x128>icons/AppIcon128.png</image128x128>
+    </icon>
+
+</application>

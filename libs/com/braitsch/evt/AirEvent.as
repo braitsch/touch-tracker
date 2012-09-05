@@ -7,13 +7,8 @@ package com.braitsch.evt {
 		public static const SETTINGS_LOADED					:String = "SETTINGS_LOADED";
 		public static const SETTINGS_UPDATED				:String = "SETTINGS_UPDATED";
 		
-		public static const NATIVE_PROCESS_FAILURE			:String = "NATIVE_PROCESS_FAILURE";
-		public static const NATIVE_PROCESS_PROGRESS			:String = "NATIVE_PROCESS_PROGRESS";
-		public static const NATIVE_PROCESS_COMPLETE			:String = "NATIVE_PROCESS_COMPLETE";	
-		public static const NATIVE_PROCESS_QUEUE_COMPLETE	:String = "NATIVE_PROCESS_QUEUE_COMPLETE";
-		
-		public static const DISPLAY_MODE_NORMAL				:String = "DISPLAY_MODE_NORMAL";
-		public static const DISPLAY_MODE_FULLSCREEN			:String = "DISPLAY_MODE_FULLSCREEN";
+		public static const NORMAL_MODE						:String = "NORMAL_MODE";
+		public static const CONTROL_MODE					:String = "CONTROL_MODE";
 		
 		public var data:Object;
 		

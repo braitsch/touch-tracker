@@ -1,6 +1,4 @@
 package com.braitsch.ui.modal {
-	import model.AppEngine;
-
 	import com.braitsch.evt.UIEvent;
 	import com.braitsch.txt.TextField;
 	import com.braitsch.ui.btns.SimpleButtonIcon;
@@ -15,7 +13,6 @@ package com.braitsch.ui.modal {
 	import flash.filesystem.File;
 	import flash.filters.GlowFilter;
 	import flash.geom.Point;
-
 
 	public class ModalWindow extends Sprite {
 
@@ -79,14 +76,14 @@ package com.braitsch.ui.modal {
 			onStageResize(e);
 			stage.focus = this;
 			stage.addEventListener(Event.RESIZE, onStageResize);
-			stage.addEventListener(UIEvent.ENTER_KEY, onEnterKey);
+			stage.addEventListener(UIEvent.KEY_ENTER, onEnterKey);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 		}
 
 		protected function onRemovedFromStage(e:Event):void
 		{
 			stage.removeEventListener(Event.RESIZE, onStageResize);
-			stage.removeEventListener(UIEvent.ENTER_KEY, onEnterKey);
+			stage.removeEventListener(UIEvent.KEY_ENTER, onEnterKey);
 			stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 		}			
 		
@@ -108,7 +105,7 @@ package com.braitsch.ui.modal {
 		
 		protected function onCloseClick(e:MouseEvent):void 
 		{
-			AppEngine.dispatch(new UIEvent(UIEvent.CLOSE_WINDOW));
+			dispatchEvent(new UIEvent(UIEvent.CLOSE_WINDOW));
 		}
 		
 		protected function get okButton():FormButton { return _okButton; }

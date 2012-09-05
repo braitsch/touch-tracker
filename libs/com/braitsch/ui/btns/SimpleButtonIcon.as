@@ -1,4 +1,5 @@
 package com.braitsch.ui.btns {
+
 	import com.greensock.TweenLite;
 
 	import flash.display.Bitmap;
@@ -15,7 +16,7 @@ package com.braitsch.ui.btns {
 		{
 			attachBase(new base());
 			if (over) attachOver(new over());
-			this.buttonMode = true
+			this.buttonMode = true;
 			this.mouseChildren = false;
 		}
 		
